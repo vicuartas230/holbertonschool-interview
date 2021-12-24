@@ -9,16 +9,15 @@
 
 heap_t *heap_insert(heap_t **root, int value)
 {
-    heap_t *node = NULL;
+	heap_t *node = NULL;
 
-    node = binary_tree_node(*root, value);
-    if (!*root)
-        *root = node;
-    else if (node->n > (*root)->n)
-    {
-        *root = node;
-        binary_tree_node((*root)->left, value);
-    }
-    
-    return (node);
+	node = binary_tree_node(*root, value);
+	if (!*root)
+		*root = node;
+	else if (node->n > (*root)->n)
+	{
+		*root = node;
+		binary_tree_node((*root)->left, value);
+	}
+	return (node);
 }
