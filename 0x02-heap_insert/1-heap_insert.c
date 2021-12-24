@@ -17,7 +17,7 @@ heap_t *heap_insert(heap_t **root, int value)
     else if (node->n > (*root)->n)
     {
         *root = node;
-        binary_tree_node()
+        binary_tree_node((*root)->left, value);
     }
     
     return (node);
