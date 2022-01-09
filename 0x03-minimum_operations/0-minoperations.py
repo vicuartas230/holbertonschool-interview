@@ -8,7 +8,7 @@ def minOperations(n):
     if primeNumber(n):
         return n
     else:
-        return 2 + minOperations(maxMultiple(n))
+        return int(n / maxMultiple(n) + minOperations(maxMultiple(n)))
 
 
 def maxMultiple(n):
@@ -16,7 +16,7 @@ def maxMultiple(n):
     primes = [2, 3, 5, 7]
     for x in primes:
         if n % x == 0:
-            return n / x
+            return int(n / x)
     return 0
 
 
