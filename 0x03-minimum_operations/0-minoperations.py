@@ -5,6 +5,8 @@
 def minOperations(n):
     """ This method calculates the fewest number of operations needed
         to result in exactly n H characters in the file. """
+    if n < 2:
+        return 0
     if primeNumber(n):
         return n
     else:
