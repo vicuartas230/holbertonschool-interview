@@ -15,11 +15,15 @@ def minOperations(n):
 
 def maxMultiple(n):
     """ This method return the highest multiple of a number n. """
-    primes = [2, 3, 5, 7]
+    primes = [
+        2, 3, 5, 7, 11, 13, 17, 19, 23,
+        29, 31, 37, 41, 43, 47, 53, 59,
+        61, 67, 71, 73, 79, 83, 89, 97
+    ]
     for x in primes:
         if n % x == 0:
             return int(n / x)
-    return 0
+    return 1
 
 
 def primeNumber(n):
