@@ -21,6 +21,8 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 		}
 		i++;
 	}
+    print_grid(grid1);
+    printf("\n");
 	round_sandpile(grid1);
 }
 
@@ -56,10 +58,27 @@ int review_sandpile(int grid[3][3])
 
 void round_sandpile(int grid[3][3])
 {
-	int i = 0, j = 0;
+	int i = 0, j = 0,
+    total[3][3] = {
+        {0, 0, 0},
+        {0, 0, 0},
+        {0, 0, 0}
+    };
 
 	if (review_sandpile(grid))
 	{
+        while (i < 3)
+		{
+			j = 0;
+			while (j < 3)
+			{
+				if (grid[i][j] < 4)
+					total[i][j] = grid[i][j];
+				j++;
+			}
+			i++;
+		}
+        i = 0;
 		while (i < 3)
 		{
 			j = 0;
@@ -67,17 +86,22 @@ void round_sandpile(int grid[3][3])
 			{
 				if (grid[i][j] >= 4)
 				{
-					grid[i][j] -= 4;
-					grid[i - 1][j]++;
-					grid[i][j - 1]++;
-					grid[i][j + 1]++;
-					grid[i + 1][j]++;
+					total[i][j] = grid[i][j] - 4;
+					(total[i - 1][j])++;
+					total[i][j + 1]++;
+					total[i + 1][j]++;
+					(total[i][j - 1])++;
 				}
-				j++;
+                j++;
 			}
 			i++;
 		}
+        printf("grid:\n");
 		print_grid(grid);
+        printf("\n");
+        grid = total;
+        printf("total:\n");
+        print_grid(total);
 		printf("\n");
 		round_sandpile(grid);
 	}
