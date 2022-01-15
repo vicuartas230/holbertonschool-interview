@@ -21,15 +21,15 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 		}
 		i++;
 	}
-    print_grid(grid1);
-    printf("\n");
+	print_grid(grid1);
+	printf("\n");
 	round_sandpile(grid1);
 }
 
 /**
  * review_sandpile - This function reviews if a grid is stable.
  * @grid: The matrix of numbers.
- * Return: 0 if grid is stable and 1 if not. 
+ * Return: 0 if grid is stable and 1 if not.
  */
 
 int review_sandpile(int grid[3][3])
@@ -59,15 +59,11 @@ int review_sandpile(int grid[3][3])
 void round_sandpile(int grid[3][3])
 {
 	int i = 0, j = 0,
-    total[3][3] = {
-        {0, 0, 0},
-        {0, 0, 0},
-        {0, 0, 0}
-    };
+	total[3][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
 
 	if (review_sandpile(grid))
 	{
-        while (i < 3)
+		while (i < 3)
 		{
 			j = 0;
 			while (j < 3)
@@ -78,34 +74,36 @@ void round_sandpile(int grid[3][3])
 			}
 			i++;
 		}
-        i = 0;
-		while (i < 3)
+		for (i = 0; i < 3; i++)
 		{
-			j = 0;
-			while (j < 3)
+			for (j = 0; j < 3; j++)
 			{
 				if (grid[i][j] >= 4)
 				{
-					total[i][j] = grid[i][j] - 4;
-					(total[i - 1][j])++;
-					total[i][j + 1]++;
-					total[i + 1][j]++;
-					(total[i][j - 1])++;
+					total[i][j] += grid[i][j] - 4;
+					total[i + 1][j] += 1;
+					total[i - 1][j] += 1;
+					total[i][j + 1] += 1;
+					total[i][j - 1] += 1;
 				}
-                j++;
 			}
-			i++;
 		}
-        printf("grid:\n");
+		printf("grid:\n");
 		print_grid(grid);
-        printf("\n");
-        grid = total;
-        printf("total:\n");
-        print_grid(total);
+		printf("\n");
+		grid = total;
+		printf("total:\n");
+		print_grid(total);
 		printf("\n");
 		round_sandpile(grid);
 	}
 }
+
+/**
+ * print_grid - Print 3x3 grid
+ * @grid: 3x3 grid
+ *
+ */
 
 static void print_grid(int grid[3][3])
 {
