@@ -17,6 +17,7 @@ int is_palindrome(listint_t **head)
 		aux = aux->next;
 	}
 	aux2 = head2;
+	aux = *head;
 	while (aux)
 	{
 		if (aux->n != aux2->n)
