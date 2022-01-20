@@ -9,59 +9,48 @@
 
 int is_palindrome(listint_t **head)
 {
-	int *values = NULL, size = 0, i = 0, j = 0;
+	listint_t *aux = *head, *head2 = NULL, *aux2 = NULL;
 
-	size = check_size(*head);
-	values = check_list(*head, size);
-	j = size - 1;
-	while (i < size)
+	while (aux)
 	{
-		if (values[i] != values[j])
-			return (0);
-		i++, j--;
+		add_nodeint(&head2, aux->n);
+		aux = aux->next;
 	}
+	aux2 = head2;
+	while (aux)
+	{
+		if (aux->n != aux2->n)
+		{
+			free_listint(head2);
+			return (0);
+		}
+	}
+	free_listint(head2);
 	return (1);
 }
 
 /**
- * check_list - This function fill array with values of the list.
+ * add_nodeint - This function adds a new node at the start of a list.
  * @head: The start of the list.
- * @size: The lenght of the list.
- * Return: An array with values of the list.
+ * @n: The value of the node.
+ * Return: The new node.
  */
 
-int *check_list(listint_t *head, int size)
+listint_t *add_nodeint(listint_t **head, const int n)
 {
-	listint_t *aux = head;
-	int *values = NULL, i = 0;
+	listint_t *new = NULL;
 
-	values = malloc(size * sizeof(int));
-	if (!values)
+	new = malloc(sizeof(listint_t));
+	if (!new)
 		return (NULL);
-	while (aux)
+	new->n = n;
+	new->next = NULL;
+	if (!*head)
+		*head = new;
+	else
 	{
-		values[i] = aux->n;
-		aux = aux->next;
-		i++;
+		new->next = *head;
+		*head = new;
 	}
-	return (values);
-}
-
-/**
- * check_size - This function returns the length of the list.
- * @head: The start of the list.
- * Return: The number of nodes that list has.
- */
-
-int check_size(listint_t *head)
-{
-	listint_t *aux = head;
-	int counter = 0;
-
-	while (aux)
-	{
-		counter++;
-		aux = aux->next;
-	}
-	return (counter);
+	return (new);
 }
