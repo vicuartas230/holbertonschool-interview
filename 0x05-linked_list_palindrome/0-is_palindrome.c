@@ -25,6 +25,8 @@ int is_palindrome(listint_t **head)
 			free_listint(head2);
 			return (0);
 		}
+		aux = aux->next;
+		aux2 = aux2->next;
 	}
 	free_listint(head2);
 	return (1);
